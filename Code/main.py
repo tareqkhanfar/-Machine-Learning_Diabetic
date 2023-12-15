@@ -29,8 +29,20 @@ print("_________________________________________________________________________
 print ("descipe the Dataset : " , dataset.describe())
 print("______________________________________________________________________________________________________________________")
 
-dataset.hist(bins=30 , figsize=(50 , 50))
+dataset.hist( bins=30 , figsize=(50 , 50))
 plt.show()
+
+
+plt.figure(figsize=(20, 10))
+for i, column in enumerate(dataset.columns[:-1], 1):  # Exclude 'Diabetic' column for box plots
+    plt.subplot(3, 3, i)
+    sns.boxplot(y=dataset[column])
+    plt.title(f'Box Plot of {column}')
+
+plt.tight_layout()
+plt.show()
+
+
 print("______________________________________________________________________________________________________________________")
 
 sns.countplot(x='Diabetic' , data=dataset)

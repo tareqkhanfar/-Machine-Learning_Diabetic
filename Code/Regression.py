@@ -26,7 +26,7 @@ class RegressionTask:
         X_scaled_data = scaler.fit_transform(x)
         print("X_scaled_data", X_scaled_data[:5])
 
-        x_train , x_test , y_train , y_test = train_test_split(X_scaled_data , y , test_size=0.2 , random_state=0 , shuffle=True )
+        x_train , x_test , y_train , y_test = train_test_split(X_scaled_data , y , test_size=0.2 , random_state=0, shuffle=True )
         lr1 = LinearRegression()
         lr1.fit(x_train , y_train)
         ages_predicted = lr1.predict(x_test)
