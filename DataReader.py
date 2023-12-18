@@ -4,7 +4,7 @@ import pandas as pd
 def replaceZeros(dataset):
     columns_with_zeros = ['PGL', 'DIA', 'TSF', 'INS', 'BMI']
     for col in columns_with_zeros:
-        mean=dataset[col].mean()
+        mean=dataset[col].median()
         dataset[col] = dataset[col].replace(0 , mean)
 
     return dataset
@@ -21,28 +21,28 @@ def cap_outliers(dataset , col):
 
 class ReadDataSet:
     def __init__(self):
-        dataSET = pd.read_csv('G:\D\MachineLearning\diabetes\Code\cleaned_diabetes_data.csv')
+        dataSET = pd.read_csv(r'G:\D\MachineLearning\diabetes\cleaned_diabetes_data2.csv')
         #dataSET = pd.read_csv(r'C:\Users\tareq\Downloads\Diabetes.csv')
 
         missing_values = dataSET.isnull().sum().sum()
         if missing_values > 0:
             raise ValueError(f"Error: Original dataset contains {missing_values} missing values.")
         dataSET.info()
-       # dataSET = self.cleanDataSet(dataSET)
+        dataSET = self.cleanDataSet(dataSET)
 
         self.dataset = dataSET
 
     def cleanDataSet(self, dataset):
 
         datasetAfterZero = replaceZeros(dataset)
-        dataSET = self.cleaner(datasetAfterZero)
-       # columns_to_cap = ['NPG', 'PGL', 'DIA', 'TSF', 'INS', 'BMI', 'DPF', 'AGE']
+        #dataSET = self.cleaner(datasetAfterZero)
+        columns_to_cap = ['NPG', 'PGL', 'DIA', 'TSF', 'INS', 'BMI', 'DPF', 'AGE']
 
-        #for col in columns_to_cap:
-         #   cap_outliers(datasetAfterZero, col)
+        for col in columns_to_cap:
+           cap_outliers(datasetAfterZero, col)
 
-        dataSET.to_csv('cleaned_diabetes_data.csv', index=False)
-        return dataSET
+        datasetAfterZero.to_csv('cleaned_diabetes_data2.csv', index=False)
+        return datasetAfterZero
     def cleaner(self , df):
         Q1 = df.quantile(0.25)
         Q3 = df.quantile(0.75)
