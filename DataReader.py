@@ -21,7 +21,7 @@ def cap_outliers(dataset , col):
 
 class ReadDataSet:
     def __init__(self):
-        dataSET = pd.read_csv('G:\D\MachineLearning\diabetes\cleaned_diabetes_data.csv')
+        dataSET = pd.read_csv('G:\D\MachineLearning\diabetes\Code\cleaned_diabetes_data.csv')
         #dataSET = pd.read_csv(r'C:\Users\tareq\Downloads\Diabetes.csv')
 
         missing_values = dataSET.isnull().sum().sum()

@@ -135,7 +135,26 @@ class RegressionTask:
         dataset = data.dataset
         print(dataset.head())
         x = dataset[['NPG' , 'PGL' , 'DIA']]
+        plt.figure(figsize=(18, 5))
+
+        # NPG vs AGE
+        plt.subplot(1, 3, 1)
+        sns.scatterplot(x=dataset['NPG'], y=dataset['AGE'])
+        plt.title('NPG vs AGE')
+
+        # DIA vs AGE
+        plt.subplot(1, 3, 2)
+        sns.scatterplot(x=dataset['DIA'], y=dataset['AGE'])
+        plt.title('DIA vs AGE')
+
+        # PGL vs AGE
+        plt.subplot(1, 3, 3)
+        sns.scatterplot(x=dataset['PGL'], y=dataset['AGE'])
+        plt.title('PGL vs AGE')
         y = dataset['AGE']
+
+        plt.tight_layout()
+        plt.show()
 
 
         scaler = MinMaxScaler()
