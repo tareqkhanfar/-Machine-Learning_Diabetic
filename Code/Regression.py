@@ -50,8 +50,14 @@ class RegressionTask:
         plt.title('Correlation Heatmap')
         plt.show()
 
+
+
+
+
+
         plt.figure(figsize=(10, 6))
         plt.plot(y_test.reset_index(drop=True), label='True Values', color='green')
+
         plt.plot(ages_predicted, label='Predicted Values', color='red')
         plt.title('Comparison of True and Predicted Values')
         plt.xlabel('Sample Index')
@@ -67,6 +73,8 @@ class RegressionTask:
         plt.xlabel('Data Point Index')
         plt.ylabel('Difference in Age')
         plt.show()
+
+
 
     @staticmethod
     def LR2() :

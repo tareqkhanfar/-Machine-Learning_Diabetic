@@ -2,10 +2,10 @@ import pandas as pd
 
 
 def replaceZeros(dataset):
-    columns_with_zeros = ['PGL', 'DIA', 'TSF', 'INS', 'BMI']
+    columns_with_zeros = ['PGL', 'DIA', 'BMI']
     for col in columns_with_zeros:
-        mean=dataset[col].median()
-        dataset[col] = dataset[col].replace(0 , mean)
+        median=dataset[col].median()
+        dataset[col] = dataset[col].replace(0 , median)
 
     return dataset
 
@@ -28,7 +28,7 @@ class ReadDataSet:
         if missing_values > 0:
             raise ValueError(f"Error: Original dataset contains {missing_values} missing values.")
         dataSET.info()
-        dataSET = self.cleanDataSet(dataSET)
+        #dataSET = self.cleanDataSet(dataSET)
 
         self.dataset = dataSET
 
@@ -36,10 +36,12 @@ class ReadDataSet:
 
         datasetAfterZero = replaceZeros(dataset)
         #dataSET = self.cleaner(datasetAfterZero)
-        columns_to_cap = ['NPG', 'PGL', 'DIA', 'TSF', 'INS', 'BMI', 'DPF', 'AGE']
+        columns_to_cap = ['NPG', 'PGL', 'DIA', 'BMI', 'DPF', 'AGE']
 
         for col in columns_to_cap:
            cap_outliers(datasetAfterZero, col)
+        columns_to_exclude = ['INS' , 'TSF']
+        datasetAfterZero = datasetAfterZero.drop(columns=columns_to_exclude)
 
         datasetAfterZero.to_csv('cleaned_diabetes_data2.csv', index=False)
         return datasetAfterZero
